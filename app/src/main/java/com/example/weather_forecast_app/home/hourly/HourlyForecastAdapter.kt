@@ -5,15 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.weather_forecast_app.databinding.Hour24ForecastListItemBinding
+import com.example.weather_forecast_app.databinding.HourlyForecastListItemBinding
 
 
 class HourlyForecastAdapter:RecyclerView.Adapter<ViewHolder>() {
-    inner class ViewHolder(binding: Hour24ForecastListItemBinding):
+    inner class ViewHolder(binding:HourlyForecastListItemBinding):
     RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-      val binding = Hour24ForecastListItemBinding.inflate(
+      val binding = HourlyForecastListItemBinding.inflate(
           LayoutInflater.from(parent.context),
           parent, false
       )

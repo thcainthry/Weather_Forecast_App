@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.HorizontalScrollView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.weather_forecast_app.databinding.HourForecast24Binding
+import com.example.weather_forecast_app.databinding.HourlyForecastBinding
 
 class HourlyForecast: Fragment() {
-    lateinit var binding: HourForecast24Binding
+    lateinit var binding: HourlyForecastBinding
     lateinit var adapter: HourlyForecastAdapter
 
     override fun onCreateView(
@@ -18,7 +18,7 @@ class HourlyForecast: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = HourForecast24Binding.inflate(inflater,
+        binding = HourlyForecastBinding.inflate(inflater,
         container,
         false)
         return binding.root
