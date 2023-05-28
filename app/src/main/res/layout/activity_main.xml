@@ -15,28 +15,31 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:name="androidx.navigation.fragment.NavHostFragment"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:deaultNavHost="true"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="1.0"
         app:navGraph="@navigation/main_nav_graph"
+        tools:layout="@layout/home_fragment" />
+
+    <ImageView
+        android:id="@+id/add_location"
+        android:layout_width="60dp"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/add"
+        android:layout_margin="8dp"
         />
-        <ImageView
-            android:id="@+id/add_location"
-            android:layout_width="60dp"
-            android:layout_height="48dp"
-            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/add"
-            android:layout_margin="8dp"
-            />
     <TextView
         android:id="@+id/city_location"
         android:layout_width="wrap_content"

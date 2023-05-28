@@ -4,21 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.HorizontalScrollView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.weather_forecast_app.databinding.HourlyForecastBinding
+import com.example.weather_forecast_app.databinding.FragmentThreeHoursBinding
 
-class HourlyForecast: Fragment() {
-    lateinit var binding: HourlyForecastBinding
-    lateinit var adapter: HourlyForecastAdapter
+class HourlyFragment: Fragment() {
+    private lateinit var binding: FragmentThreeHoursBinding
+    private lateinit var adapter: HourlyAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = HourlyForecastBinding.inflate(inflater,
+        binding = FragmentThreeHoursBinding.inflate(inflater,
         container,
         false)
         return binding.root
@@ -26,9 +26,11 @@ class HourlyForecast: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.hour24RecycleList.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false)
-        adapter = HourlyForecastAdapter()
+        binding.hour24RecycleList.layoutManager = LinearLayoutManager(activity)
+        adapter = HourlyAdapter()
         binding.hour24RecycleList.adapter = adapter
+
+
     }
 
 }

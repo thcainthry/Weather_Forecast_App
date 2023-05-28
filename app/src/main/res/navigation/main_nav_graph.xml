@@ -8,29 +8,15 @@
         android:id="@+id/homeFragment"
         android:name="com.example.weather_forecast_app.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home">
+        tools:layout="@layout/home_fragment">
+
         <action
-            android:id="@+id/homeToDetail"
-            app:destination="@+id/fragmentDetail"/>
-        <argument
-            android:name="character"
-            app:argType="string"
-            android:defaultValue=""
-            app:nullable="true"/>
+            android:id="@+id/action_homeFragment_to_action_fragment_three"
+            app:destination="@id/action_fragment_three" />
     </fragment>
     <fragment
-        android:id="@+id/fragmentDetail"
-        android:name="com.example.weather_forecast_app.home.HomeFragment"
+        android:id="@+id/action_fragment_three"
+        android:name="com.example.weather_forecast_app.home.hourly.HourlyFragment"
         android:label="FragmentDetail"
-        tools:layout="@layout/fragment_detail">
-        <argument
-            android:name="character_id"
-            app:argType="string"
-            app:nullable="true"
-            android:defaultValue="default_id"
-            />
-        <action android:id="@+id/detailToHome"
-            app:destination="@+id/homeFragment"
-            />
-    </fragment>
+        tools:layout="@layout/fragment_three_hours"/>
 </navigation>
