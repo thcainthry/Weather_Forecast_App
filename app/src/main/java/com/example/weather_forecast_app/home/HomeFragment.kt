@@ -29,6 +29,8 @@ class HomeFragment : Fragment() {
         binding.threeHour.setOnClickListener{
             findNavController().navigate(R.id.action_homeFragment_to_action_fragment_three)
         }
+
+
     }
 
 }

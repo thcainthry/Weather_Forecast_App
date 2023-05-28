@@ -13,10 +13,19 @@
         <action
             android:id="@+id/action_homeFragment_to_action_fragment_three"
             app:destination="@id/action_fragment_three" />
+        <action
+            android:id="@+id/action_homeFragment_to_cityFragment"
+            app:destination="@id/cityFragment" />
     </fragment>
     <fragment
         android:id="@+id/action_fragment_three"
         android:name="com.example.weather_forecast_app.home.hourly.HourlyFragment"
         android:label="FragmentDetail"
         tools:layout="@layout/fragment_three_hours"/>
+    <fragment
+        android:id="@+id/cityFragment"
+        android:name="com.example.weather_forecast_app.home.addCity.CityFragment"
+        android:label="CityFragment"
+        tools:layout="@layout/city_search_add"
+        />
 </navigation>
