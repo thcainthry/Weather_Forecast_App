@@ -26,7 +26,7 @@ class HourlyFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.hour24RecycleList.layoutManager = LinearLayoutManager(activity)
+        binding.hour24RecycleList.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         adapter = HourlyAdapter()
         binding.hour24RecycleList.adapter = adapter
 

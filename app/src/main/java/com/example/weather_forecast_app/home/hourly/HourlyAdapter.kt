@@ -3,10 +3,8 @@ package com.example.weather_forecast_app.home.hourly
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.weather_forecast_app.databinding.HourlyForecastListItemBinding
-import com.example.weather_forecast_app.domain.ListW
-import com.example.weather_forecast_app.domain.Main
+import com.example.weather_forecast_app.domain.models.ListW
 
 
 class HourlyAdapter:RecyclerView.Adapter<HourlyAdapter.ViewHolder>() {
@@ -30,18 +28,16 @@ class HourlyAdapter:RecyclerView.Adapter<HourlyAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: HourlyAdapter.ViewHolder, position: Int) {
-        with(holder.binding){
-            hourlyTemp.text = wind[position].main?.temp.toString()
-            windSpeed.text = wind[position].wind?.speed.toString()
-            time.text = wind[position].dt.toString()
-
-        }
+//        with(holder.binding){
+//            hourlyTemp.text = wind[position].main?.temp.toString()
+//            windSpeed.text = wind[position].wind?.speed.toString()
+//            time.text = wind[position].dt.toString()
+//
+//        }
     }
 
 
-    override fun getItemCount(): Int {
-        return wind.size
-    }
+    override fun getItemCount() = 10
 
 
 

@@ -1,4 +1,4 @@
-package com.example.weather_forecast_app.domain
+package com.example.weather_forecast_app.domain.models
 
 import com.google.gson.annotations.SerializedName
 
@@ -82,3 +82,7 @@ data class City (
     @SerializedName("sunset"     ) var sunset     : Int?    = null
 
 )
+
+
+//@Get
+//suspend fun gwtCurrentWeatherForCity(@Query("q") city: String, @Query("appid") appid: String ):WeatherResult
