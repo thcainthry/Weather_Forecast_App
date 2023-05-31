@@ -6,7 +6,7 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.weather_forecast_app.home.HomeFragment"
+        android:name="com.example.weather_forecast_app.ui.home.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/home_fragment">
 
@@ -16,16 +16,34 @@
         <action
             android:id="@+id/action_homeFragment_to_cityFragment"
             app:destination="@id/cityFragment" />
+        <argument
+            android:name="city"
+            app:argType="string"
+            android:defaultValue=" "
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/action_fragment_three"
-        android:name="com.example.weather_forecast_app.home.hourly.HourlyFragment"
+        android:name="com.example.weather_forecast_app.ui.hourly.HourlyFragment"
         android:label="FragmentDetail"
-        tools:layout="@layout/fragment_three_hours"/>
+        tools:layout="@layout/fragment_three_hours">
+        <argument
+            android:name="hourly_forecast"
+            android:defaultValue="default_id"
+            app:argType="string"
+            app:nullable="true" />
+
+    </fragment>
     <fragment
         android:id="@+id/cityFragment"
-        android:name="com.example.weather_forecast_app.home.addCity.CityFragment"
+        android:name="com.example.weather_forecast_app.ui.selectCity.CityFragment"
         android:label="CityFragment"
         tools:layout="@layout/city_search_add"
-        />
+        >
+        <argument
+            android:name="city"
+            android:defaultValue="default_id"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 </navigation>
