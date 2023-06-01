@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel: ViewModel() {
             var isHome = true
+            val appKey = "3fd109d206c33b68e4b21397d3cf9943"
             private val homeRepo = HomeRepo()
             val homeData = MutableLiveData<ForecastCity>()
             private val homeList = ArrayList<ForecastCity>()
@@ -20,7 +21,7 @@ class HomeViewModel: ViewModel() {
 
     fun getCurrentWeather(q:String, appid: String){
         viewModelScope.launch {
-            homeList.addAll(listOf(homeRepo.getCurrentWeatherForCity(q,appid)))
+            homeList.addAll(listOf(homeRepo.getCurrentWeatherForCity(q,appKey)))
             searchLiveData.value = homeList
         }
     }

@@ -14,19 +14,20 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weather_forecast_app.R
+import com.example.weather_forecast_app.data.DataPass
 import com.example.weather_forecast_app.databinding.HomeFragmentBinding
 import com.example.weather_forecast_app.domain.models.ForecastCity
 import com.example.weather_forecast_app.domain.models.Main
 import com.example.weather_forecast_app.domain.models.MainFive
 import com.example.weather_forecast_app.domain.models.Weather
+import com.example.weather_forecast_app.ui.selectCity.CityAdapter
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(),DataPass {
 
     lateinit var binding: HomeFragmentBinding
     private val adapter = HomeAdapter()
     private val homeViewModel: HomeViewModel by viewModels()
     val args: HomeFragmentArgs by navArgs()
-    val appid = "3fd109d206c33b68e4b21397d3cf9943"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,7 +46,8 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.fiveRecycleList.layoutManager =  LinearLayoutManager(activity)
         binding.fiveRecycleList.adapter = adapter
-        with(binding){
+//        with(binding){
+
 
 //            cityHome.text = tempCN.name
 //            mainTemp.text = tempV.temp.toString()
@@ -67,14 +69,20 @@ class HomeFragment : Fragment() {
 //                homeViewModel.searchCity(text.toString(),appid)
 
 //            }
-        }
+//        }
 
 
         binding.threeHour.setOnClickListener{
             findNavController().navigate(R.id.action_homeFragment_to_action_fragment_three)
         }
 
+    }
 
+    override fun onDataPass(cityName: String,mainTemp: String, lowTemp: String, highTemp: String) {
+        binding.cityHome.text = cityName
+        binding.mainTemp.text = mainTemp
+        binding.lowTemp.text = lowTemp
+        binding.highTemp.text = highTemp
     }
 
 }

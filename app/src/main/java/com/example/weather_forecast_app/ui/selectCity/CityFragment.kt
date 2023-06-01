@@ -16,12 +16,15 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.weather_forecast_app.data.DataPass
 import com.example.weather_forecast_app.databinding.CitySearchAddBinding
 import com.example.weather_forecast_app.domain.models.ForecastCity
 
 class CityFragment : Fragment() {
     lateinit var binding: CitySearchAddBinding
-    private val adapter = CityAdapter()
+    val adapter = CityAdapter(object : DataPass{
+        override fun onDataPass(cityName: String, mainTemp: String, lowTemp: String, highTemp: String){}
+    })
     private lateinit var layoutManager: LinearLayoutManager
     private val viewModel: CityViewModel by viewModels()
     val args: CityFragmentArgs by navArgs()
@@ -47,7 +50,11 @@ class CityFragment : Fragment() {
         if (viewModel.isHome){
             args.city?.let { viewModel.getCurrentWeatherForCity(it,appiKey) }
         }
+
+
+
         with(binding){
+
             layoutManager = LinearLayoutManager(activity)
             cityList.adapter = adapter
             cityList.layoutManager = layoutManager
@@ -64,7 +71,10 @@ class CityFragment : Fragment() {
                 viewModel.searchCity(text.toString())
             }
         }
+
+
     }
+
     private fun observeViewModel(){
         viewModel.cityLiveData.observe(viewLifecycleOwner){
             adapter.cities = it
