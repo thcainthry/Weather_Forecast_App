@@ -34,16 +34,20 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>(){
         return ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        return cities.size
-    }
+
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+                val city = cities[position]
+                val temp = tempV[position]
             with(holder.binding){
-                cityName.text = cities[position].name
-                lowTempCity.text = tempV[position].tempMin.toString()
-                highTempCity.text = tempV[position].tempMax.toString()
-                mainTempCity.text = tempV[position].temp.toString()
+                cityName.text = city.name
+                lowTempCity.text = temp.tempMin.toString()
+                highTempCity.text = temp.tempMax.toString()
+                mainTempCity.text = temp.temp.toString()
+
+
             }
+
     }
+    override fun getItemCount() = cities.size
 }

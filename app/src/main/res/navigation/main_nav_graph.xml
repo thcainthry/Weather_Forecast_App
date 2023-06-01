@@ -32,6 +32,9 @@
             android:defaultValue="default_id"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_action_fragment_three_to_cityFragment"
+            app:destination="@id/cityFragment" />
 
     </fragment>
     <fragment

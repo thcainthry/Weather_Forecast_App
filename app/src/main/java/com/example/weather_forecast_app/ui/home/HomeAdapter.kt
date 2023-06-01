@@ -8,7 +8,7 @@ import com.example.weather_forecast_app.domain.models.FiveDayForecast
 import com.example.weather_forecast_app.domain.models.MainFive
 import com.example.weather_forecast_app.domain.models.WeatherFive
 
-class FiveDayForecastAdapter: RecyclerView.Adapter<FiveDayForecastAdapter.ViewHolder>() {
+class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     var days = arrayListOf<FiveDayForecast>()
         set(value) {
@@ -25,21 +25,21 @@ class FiveDayForecastAdapter: RecyclerView.Adapter<FiveDayForecastAdapter.ViewHo
             field = value
             notifyDataSetChanged()
         }
-    inner class ViewHolder(
-        val binding:ItemFiveDayBinding
-    ): RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(val binding:ItemFiveDayBinding):
+        RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
+            ViewHolder {
        val binding = ItemFiveDayBinding.inflate(
-           LayoutInflater.from(parent.context))
+           LayoutInflater.from(parent.context),
+           parent,false
+       )
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder.binding){
+
             day.text = days[position].dtTxt
             weatherConditionDay.text = otherInfoD[position].description
             highTempDay.text = tempV[position].tempMax.toString()
@@ -47,5 +47,5 @@ class FiveDayForecastAdapter: RecyclerView.Adapter<FiveDayForecastAdapter.ViewHo
         }
     }
 
-    override fun getItemCount(): Int = 5
+    override fun getItemCount(): Int = days.size
 }

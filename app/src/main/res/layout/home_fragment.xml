@@ -8,7 +8,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+        <EditText
+            android:id="@+id/search_bar_home"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="Search"
+            android:textSize="20dp"
+            android:background="@drawable/city_search"
+            android:layout_margin="20dp"
+            android:drawableEnd="@drawable/baseline_search_24"
+            />
         <TextView
             android:id="@+id/main_temp"
             android:layout_width="wrap_content"
@@ -21,7 +33,7 @@
             android:textSize="100sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/search_bar_home"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -34,7 +46,17 @@
             app:layout_constraintTop_toTopOf="@+id/main_temp"
             app:layout_constraintStart_toEndOf="@+id/main_temp"
             />
-
+        <TextView
+            android:id="@+id/city_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="City Name"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="@+id/weather_condition"
+            app:layout_constraintBottom_toTopOf="@+id/weather_condition"
+            app:layout_constraintTop_toBottomOf="@+id/main_temp"
+            />
         <TextView
             android:id="@+id/weather_condition"
             android:layout_width="wrap_content"
@@ -175,7 +197,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/sunrise_sunset"
-        android:layout_width="170dp"
+        android:layout_width="160dp"
         android:layout_height="0dp"
         app:cardCornerRadius="15dp"
         android:layout_marginTop="8dp"
@@ -257,7 +279,7 @@
     </androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
         android:id="@+id/other_info"
-        android:layout_width="190dp"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         app:cardCornerRadius="15dp"
         android:backgroundTint="#3E000000"
@@ -439,7 +461,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/wind_direction"
-        android:layout_width="170dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         app:cardCornerRadius="15dp"
         android:layout_marginTop="5dp"

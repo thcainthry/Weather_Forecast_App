@@ -1,5 +1,6 @@
 package com.example.weather_forecast_app
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.Navigation
@@ -17,6 +18,17 @@ class MainActivity : AppCompatActivity() {
         binding.addLocation.setOnClickListener{
             Navigation.findNavController(this@MainActivity,
             R.id.nav_host_fragment).navigate(R.id.action_homeFragment_to_cityFragment)
+        }
+//        binding.addLocation.setOnClickListener{
+//            Navigation.findNavController(this@MainActivity,
+//            R.id.nav_host_fragment).navigate(R.id.action_action_fragment_three_to_cityFragment)
+//        }
+        binding.more.setOnClickListener{
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.putExtra(Intent.EXTRA_TEXT,"")
+            intent.type = "text/plain"
+            val shareIntent = Intent.createChooser(intent,null)
+            startActivity(shareIntent)
         }
     }
 }
