@@ -45,11 +45,11 @@ interface ApiService {
 //        @Query("visibility") visibility: Int
 //    ): ForecastCity
 //
-//    @GET ("weather")
-//    suspend fun getHourly(
-//        @Query("dt") dt: Int,
-//        @Query ("temp") temp: Double,
-//    ): List<ForecastCity>
+    @GET ("weather")
+    suspend fun getHourly(
+        @Query("dt") dt: Int,
+        @Query ("temp") temp: Double,
+    ): List<ForecastCity>
 }
 
 

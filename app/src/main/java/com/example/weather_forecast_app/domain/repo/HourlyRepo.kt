@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class HourlyRepo {
     private val apiService: ApiService
-    val apiKey = "3e8d60b00adaafe61410a45ff9550a81"
+    val apiKey = "3fd109d206c33b68e4b21397d3cf9943"
     val baseUrl = "https://api.openweathermap.org/data/2.5/"
 
     init {
@@ -21,9 +21,9 @@ class HourlyRepo {
         apiService = retrofit.create(ApiService::class.java)
     }
 
-//
-//    suspend fun getHourly(dt: Int,temp: Double):
-//            List<ForecastCity> = apiService.getHourly(dt,temp)
+
+    suspend fun getHourly(dt: Int,temp: Double):
+            List<ForecastCity> = apiService.getHourly(dt,temp)
 
 
 }

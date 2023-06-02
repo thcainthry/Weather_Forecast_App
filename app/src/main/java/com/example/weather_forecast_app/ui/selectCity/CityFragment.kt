@@ -28,7 +28,7 @@ class CityFragment : Fragment() {
     private lateinit var layoutManager: LinearLayoutManager
     private val viewModel: CityViewModel by viewModels()
     val args: CityFragmentArgs by navArgs()
-    val appiKey = "3e8d60b00adaafe61410a45ff9550a81"
+    val appiKey = "3fd109d206c33b68e4b21397d3cf9943"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +48,7 @@ class CityFragment : Fragment() {
         observeViewModel()
         args.city?.let { viewModel.setIsHome(it) }
         if (viewModel.isHome){
-            args.city?.let { viewModel.getCurrentWeatherForCity(it,appiKey) }
+            args.city?.let { viewModel.getCurrentWeatherForCity(it) }
         }
 
 

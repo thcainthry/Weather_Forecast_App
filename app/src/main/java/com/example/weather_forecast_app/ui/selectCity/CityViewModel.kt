@@ -22,9 +22,9 @@ class CityViewModel:ViewModel() {
             cityLiveData.value = cityList
         }
     }
-    fun getCurrentWeatherForCity(q: String, appid: String){
+    fun getCurrentWeatherForCity(q: String){
         viewModelScope.launch {
-            cityList.addAll(listOf(cityRepo.getCurrentWeatherForCity(q,appid)))
+            cityList.addAll(listOf(cityRepo.getCurrentWeatherForCity(q)))
             cityLiveData.value = cityList
         }
     }

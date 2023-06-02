@@ -13,13 +13,13 @@ class HourlyViewModel:ViewModel() {
         val hourlyLiveData = MutableLiveData<List<ForecastCity>>()
         private val hourlyList = ArrayList<ForecastCity>()
 
-//    fun getHourly(dt: Int,temp: Double){
-//        viewModelScope.launch {
-//            hourlyList.addAll(repo.getHourly(dt,temp))
-//            hourlyLiveData.value = hourlyList
-//        }
+    fun getHourly(dt: Int,temp: Double){
+        viewModelScope.launch {
+            hourlyList.addAll(repo.getHourly(dt,temp))
+            hourlyLiveData.value = hourlyList
+        }
 
-//    }
+    }
 
 
 }
