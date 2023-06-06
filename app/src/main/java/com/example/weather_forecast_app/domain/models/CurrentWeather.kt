@@ -2,7 +2,7 @@ package com.example.weather_forecast_app.domain.models
 
 import com.google.gson.annotations.SerializedName
 
-data class ForecastCity (
+data class CurrentWeather (
     @SerializedName("coord"      ) var coord      : Coord?             = Coord(),
     @SerializedName("weather"    ) var weather    : ArrayList<Weather> = arrayListOf(),
     @SerializedName("base"       ) var base       : String?            = null,
@@ -16,6 +16,7 @@ data class ForecastCity (
     @SerializedName("id"         ) var id         : Int?               = null,
     @SerializedName("name"       ) var name       : String?            = null,
     @SerializedName("cod"        ) var cod        : Int?               = null
+
 )
 
 data class Coord (

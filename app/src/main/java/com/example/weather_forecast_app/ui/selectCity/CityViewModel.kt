@@ -1,52 +1,31 @@
 package com.example.weather_forecast_app.ui.selectCity
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.weather_forecast_app.domain.models.ForecastCity
-import com.example.weather_forecast_app.domain.repo.CityRepository
+import com.example.weather_forecast_app.domain.models.CurrentWeather
+import com.example.weather_forecast_app.domain.repo.CurrentWeatherRepo
 import kotlinx.coroutines.launch
 
-class CityViewModel:ViewModel() {
+class CityViewModel: ViewModel() {
 
-    var currentPage = 1
-    var isHome = true
-    private val cityRepo = CityRepository()
-    private val cityList = ArrayList<ForecastCity>()
-    private val searchResults = ArrayList<ForecastCity>()
-    val cityLiveData = MutableLiveData<List<ForecastCity>>()
 
-    fun getCity(page: Int){
+    private val cityRepo = CurrentWeatherRepo()
+    private val cityList = ArrayList<CurrentWeather>()
+    private val searchResults = ArrayList<CurrentWeather>()
+    val cityLiveData = MutableLiveData<List<CurrentWeather>>()
+
+    fun getWeatherCity(q: String, appid: String, units: String){
         viewModelScope.launch {
-            cityList.addAll(listOf(cityRepo.getCity(page)))
-            cityLiveData.value = cityList
-        }
-    }
-    fun getCurrentWeatherForCity(q: String){
-        viewModelScope.launch {
-            cityList.addAll(listOf(cityRepo.getCurrentWeatherForCity(q)))
-            cityLiveData.value = cityList
-        }
-    }
-
-    fun loadMore(){
-        currentPage++
-        getCity(currentPage)
-    }
-
-    fun searchCity(query: String) {
-        searchResults.clear()
-        for (city in cityList) {
-            city.name?.let {
-                if (it.startsWith(query, true)) {
-                    searchResults.add(city)
-                }
+            try {
+                val cityData = cityRepo.getCurrentWeatherForCity(q,appid,units)
+                cityLiveData.value = listOf(cityData)
+            }catch (e: Exception){
+                Log.e("Tag", "Error fetching weather data: ${e.message}", e)
             }
         }
-        cityLiveData.value = searchResults
     }
 
-    fun setIsHome(args: String){
-        isHome = (args !=" ")
-    }
+
 }

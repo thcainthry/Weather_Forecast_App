@@ -1,44 +1,45 @@
 package com.example.weather_forecast_app.ui.home
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.weather_forecast_app.domain.models.CurrentWeather
 import com.example.weather_forecast_app.domain.models.FiveDayForecast
-import com.example.weather_forecast_app.domain.models.ForecastCity
-import com.example.weather_forecast_app.domain.repo.CityRepository
+import com.example.weather_forecast_app.domain.models.Weather
+import com.example.weather_forecast_app.domain.repo.CurrentWeatherRepo
 import com.example.weather_forecast_app.domain.repo.FiveDayRepository
-import com.example.weather_forecast_app.domain.repo.HomeRepo
 import kotlinx.coroutines.launch
 
 class HomeViewModel: ViewModel() {
-            var isHome = true
-            val appKey = "3fd109d206c33b68e4b21397d3cf9943"
-            private val homeRepo = HomeRepo()
-            val homeData = MutableLiveData<ForecastCity>()
-            private val homeList = ArrayList<ForecastCity>()
-            private val searchRes = ArrayList<ForecastCity>()
-            val searchLiveData = MutableLiveData<List<ForecastCity>>()
 
-    fun getCurrentWeather(q:String, appid: String){
+    private val currentWeatherRepo = CurrentWeatherRepo()
+    private val forecastRepo = FiveDayRepository()
+    val weatherLiveData = MutableLiveData<List<CurrentWeather>>()
+    val daysLiveData = MutableLiveData<List<FiveDayForecast>>()
+
+
+    fun getCurrentWeather(q: String, appid: String, units: String) {
         viewModelScope.launch {
-            homeList.addAll(listOf(homeRepo.getCurrentWeatherForCity(q,appKey)))
-            searchLiveData.value = homeList
+          try {
+              val weatherData = currentWeatherRepo.getCurrentWeatherForCity(q,appid,units)
+              weatherLiveData.value = listOf(weatherData)
+          }catch (e: Exception){
+              Log.e("Tag", "Error fetching weather data: ${e.message}", e)
+          }
         }
     }
 
-    fun searchCity(q: String,appid: String){
-        searchRes.clear()
-        for (city in homeList){
-            city.name?.let {
-                if (it.startsWith(q,true)){
-                    searchRes.add(city)
+    fun getForecastData(q: String, appid: String){
+        viewModelScope.launch {
+                try {
+                    val forecastData = forecastRepo.getForecastData(q,appid)
+                    val forecastList = listOf(forecastData)
+                    daysLiveData.value = forecastList
+                }catch (e: Exception){
+                    Log.e("Tag", "Error fetching weather data: ${e.message}")
                 }
-            }
         }
-        searchLiveData.value = searchRes
-    }
-    fun setIsHome(args: String) {
-        isHome = (args != " ")
     }
 
 }

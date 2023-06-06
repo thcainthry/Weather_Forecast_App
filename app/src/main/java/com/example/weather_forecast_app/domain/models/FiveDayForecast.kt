@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class FiveDayForecast (
         @SerializedName("dt"         ) var dt         : Int?               = null,
-        @SerializedName("main"       ) var main       : Main?              = Main(),
-        @SerializedName("weather"    ) var weather    : ArrayList<Weather> = arrayListOf(),
+        @SerializedName("main"       ) var mainFive       : MainFive?              = MainFive(),
+        @SerializedName("weather"    ) var weatherFive    : ArrayList<WeatherFive> = arrayListOf(),
         @SerializedName("clouds"     ) var clouds     : Clouds?            = Clouds(),
         @SerializedName("wind"       ) var wind       : Wind?              = Wind(),
         @SerializedName("visibility" ) var visibility : Int?               = null,

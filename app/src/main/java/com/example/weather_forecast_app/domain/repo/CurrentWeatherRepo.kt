@@ -1,29 +1,21 @@
 package com.example.weather_forecast_app.domain.repo
 
 import com.example.weather_forecast_app.data.ApiService
-import com.example.weather_forecast_app.domain.models.ForecastCity
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
+import com.example.weather_forecast_app.domain.models.CurrentWeather
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class HourlyRepo {
+class CurrentWeatherRepo {
     private val apiService: ApiService
-    val apiKey = "3fd109d206c33b68e4b21397d3cf9943"
-    val baseUrl = "https://api.openweathermap.org/data/2.5/"
 
-    init {
+    init{
         val retrofit = Retrofit.Builder()
-            .baseUrl(baseUrl)
+            .baseUrl("https://api.openweathermap.org/data/2.5/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-
         apiService = retrofit.create(ApiService::class.java)
     }
 
-
-    suspend fun getHourly(dt: Int,temp: Double):
-            List<ForecastCity> = apiService.getHourly(dt,temp)
-
-
+    suspend fun getCurrentWeatherForCity(q: String,appid:String, units: String):
+            CurrentWeather = apiService.getCurrentWeatherForCity(q,appid,units)
 }
