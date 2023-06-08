@@ -10,6 +10,7 @@ import com.example.weather_forecast_app.domain.models.MainFive
 class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>(){
 
 
+
     var cities: List<CurrentWeather> = emptyList()
         set(value) {
             field = value

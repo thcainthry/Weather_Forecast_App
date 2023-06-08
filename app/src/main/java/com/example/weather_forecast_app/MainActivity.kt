@@ -20,6 +20,10 @@ class MainActivity : AppCompatActivity(), HomeFragment.CityNameListener {
         setContentView(binding.root)
 
 
+//        binding.addLocation.setOnClickListener{
+//            Navigation.findNavController(this@MainActivity,
+//            R.id.nav_host_fragment).navigate(R.id.action_action_fragment_three_to_cityFragment)
+//        }
 
 
 

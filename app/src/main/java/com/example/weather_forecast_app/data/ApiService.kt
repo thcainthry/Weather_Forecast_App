@@ -17,5 +17,9 @@ interface ApiService {
         @Query("q") q: String,
         @Query("appid") appid: String
     ):FiveDayForecast
-
+    @GET ("forecast")
+    suspend fun getHourly(
+        @Query("dt") dt: Int,
+        @Query ("temp") temp: Double,
+    ): List<FiveDayForecast>
 }

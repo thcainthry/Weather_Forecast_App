@@ -31,6 +31,7 @@ class HomeFragment : Fragment() {
     }
     private var cityNameListener: CityNameListener? = null
 
+
     lateinit var binding: HomeFragmentBinding
     private val adapter = HomeAdapter()
     private val homeViewModel: HomeViewModel by viewModels()
@@ -76,7 +77,6 @@ class HomeFragment : Fragment() {
                 searchBarHome.visibility = View.VISIBLE
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     var query = binding.searchBarHome.text.toString().trim()
-                    cityNameListener?.onCityNameEntered(cityName = query )
                     homeViewModel.getCurrentWeather(query, "3fd109d206c33b68e4b21397d3cf9943","metric")
                     homeViewModel.getForecastData(query,"3fd109d206c33b68e4b21397d3cf9943")
                     val inputMethodManager =
@@ -102,29 +102,22 @@ class HomeFragment : Fragment() {
             adapter.current = weatherList
            if (weatherList.isNotEmpty()){
                val weatherData = weatherList[0]
-               val temp = weatherData.main?.temp
-               val tempMax = weatherData.main?.tempMax
-               val tempMin = weatherData.main?.tempMin
-               val cityName = weatherData.name
-               val pressure = weatherData.main?.pressure
-               val humidity = weatherData.main?.humidity
-               val wind = weatherData.wind?.speed
                val sunrise = weatherData.sys?.sunrise?:0
                val sunset = weatherData.sys?.sunset?:0
-               val description = weatherData.weather[0].description
                val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
 
-               binding.mainTemp.text = temp.toString()?.substring(0,2)
-               binding.highTemp.text = tempMax.toString()?.substring(0,2)
-               binding.lowTemp.text = tempMin.toString()?.substring(0,2)
-               binding.cityHome.text = cityName.toString()
-               binding.pressureNr.text = pressure.toString()
-               binding.humidityNr.text = humidity.toString()
-               binding.windSpeedD.text = wind.toString()
+               binding.mainTemp.text = weatherData.main?.temp.toString()?.substring(0,2)
+               binding.highTemp.text = weatherData.main?.tempMax.toString()?.substring(0,2)
+               binding.lowTemp.text = weatherData.main?.tempMin.toString()?.substring(0,2)
+               binding.cityHome.text = weatherData.name.toString()
+               binding.pressureNr.text = weatherData.main?.pressure.toString()
+               binding.humidityNr.text = weatherData.main?.humidity.toString()
+               binding.windSpeedD.text = weatherData.wind?.speed.toString()
                binding.sunrise.text = timeFormat.format(Date(sunrise*1000L)).toString()
                binding.sunset.text =  timeFormat.format(Date(sunset*1000L)).toString()
-               binding.weatherCondition.text = description.toString()
-               saveData(cityName.toString())
+               binding.weatherCondition.text = weatherData.weather[0].description.toString()
+               saveData(weatherData.wind?.speed.toString())
+               cityNameListener?.onCityNameEntered(cityName = weatherData.name.toString())
 
 
            }
@@ -138,15 +131,10 @@ class HomeFragment : Fragment() {
                     isLayoutAdded = true
                     for (i in 0 until forecastList.size){
                         val weatherForecast = forecastList[i]
-                        val day = weatherForecast.dtTxt.toString()
-                        val weatherCond = weatherForecast.weatherFive.firstOrNull()?.description
-                        val highTempD = weatherForecast.mainFive?.tempMax.toString()
-                        val lowTempD = weatherForecast.mainFive?.tempMin.toString()
-
-                        binding.fiveRecycleList.getChildAt(i).findViewById<TextView>(R.id.day).text = day
-                        binding.fiveRecycleList.getChildAt(i).findViewById<TextView>(R.id.weather_condition_day).text = weatherCond
-                        binding.fiveRecycleList.getChildAt(i).findViewById<TextView>(R.id.high_temp_day).text = highTempD
-                        binding.fiveRecycleList.getChildAt(i).findViewById<TextView>(R.id.low_temp_day).text = lowTempD
+                        binding.fiveRecycleList.getChildAt(i).findViewById<TextView>(R.id.day).text = weatherForecast.dtTxt.toString()
+                        binding.fiveRecycleList.getChildAt(i).findViewById<TextView>(R.id.weather_condition_day).text = weatherForecast.weatherFive.firstOrNull()?.description
+                        binding.fiveRecycleList.getChildAt(i).findViewById<TextView>(R.id.high_temp_day).text = weatherForecast.mainFive?.tempMax.toString()
+                        binding.fiveRecycleList.getChildAt(i).findViewById<TextView>(R.id.low_temp_day).text = weatherForecast.mainFive?.tempMin.toString()
 
                     }
                 }

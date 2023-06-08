@@ -35,12 +35,12 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+//        val daysL = days[position]
 //        with(holder.binding){
-//
-//            day.text = days[position].dt.toString()
-//            weatherConditionDay.text = otherInfoD[position].description
-//            highTempDay.text = tempV[position].tempMax.toString()
-//            lowTempDay.text = tempV[position].tempMin.toString()
+//            day.text = daysL.dtTxt.toString()
+//            weatherConditionDay.text = daysL.weatherFive.firstOrNull()?.description
+//            highTempDay.text = daysL.mainFive?.tempMax.toString()
+//            lowTempDay.text = daysL.mainFive?.tempMin.toString()
 //        }
     }
 

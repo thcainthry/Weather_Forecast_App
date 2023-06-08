@@ -21,8 +21,8 @@ class CityFragment : Fragment() {
     private val adapter = CityAdapter()
     private lateinit var layoutManager: LinearLayoutManager
     private val viewModel: CityViewModel by viewModels()
-    val args: CityFragmentArgs by navArgs()
-    val appiKey = "3fd109d206c33b68e4b21397d3cf9943"
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
