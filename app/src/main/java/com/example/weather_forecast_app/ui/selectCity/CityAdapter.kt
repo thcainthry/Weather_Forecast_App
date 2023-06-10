@@ -1,14 +1,17 @@
 package com.example.weather_forecast_app.ui.selectCity
 
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather_forecast_app.databinding.CityItemBinding
 import com.example.weather_forecast_app.domain.models.CurrentWeather
 import com.example.weather_forecast_app.domain.models.MainFive
+import com.example.weather_forecast_app.ui.RecyclerViewItemClick
 
-class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>(){
-
+class CityAdapter(
+    private val recycleViewItemClick: RecyclerViewItemClick
+) : RecyclerView.Adapter<CityAdapter.ViewHolder>(){
 
 
     var cities: List<CurrentWeather> = emptyList()
@@ -38,11 +41,16 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>(){
                 mainTempCity.text = city.main?.temp.toString()?.substring(0,2)
                 lowTempCity.text = city.main?.tempMin.toString()?.substring(0,2)
                 highTempCity.text= city.main?.tempMax.toString()?.substring(0,2)
-
+                holder.itemView.setOnClickListener{
+                    recycleViewItemClick.onItemClicked(city.name.toString())
+                }
             }
 
+
+
+
         }
-
-
     override fun getItemCount(): Int = cities.size
+
+
 }

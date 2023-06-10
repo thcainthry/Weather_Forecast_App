@@ -18,11 +18,25 @@ class HomeViewModel: ViewModel() {
     val weatherLiveData = MutableLiveData<List<CurrentWeather>>()
     val daysLiveData = MutableLiveData<List<FiveDayForecast>>()
 
+    private val cityRepo = CurrentWeatherRepo()
+    val cityLiveData = MutableLiveData<List<CurrentWeather>>()
 
-    fun getCurrentWeather(q: String, appid: String, units: String) {
+    fun getWeatherCity(q: String){
+        viewModelScope.launch {
+            try {
+                val cityData = cityRepo.getCurrentWeatherForCity(q)
+                cityLiveData.value = listOf(cityData)
+            }catch (e: Exception){
+                Log.e("Tag", "Error fetching weather data: ${e.message}", e)
+            }
+        }
+    }
+
+
+    fun getCurrentWeather(q: String) {
         viewModelScope.launch {
           try {
-              val weatherData = currentWeatherRepo.getCurrentWeatherForCity(q,appid,units)
+              val weatherData = currentWeatherRepo.getCurrentWeatherForCity(q)
               weatherLiveData.value = listOf(weatherData)
           }catch (e: Exception){
               Log.e("Tag", "Error fetching weather data: ${e.message}", e)
@@ -30,15 +44,25 @@ class HomeViewModel: ViewModel() {
         }
     }
 
-    fun getForecastData(q: String, appid: String){
+    fun getForecastData(q: String){
         viewModelScope.launch {
                 try {
-                    val forecastData = forecastRepo.getForecastData(q,appid)
+                    val forecastData = forecastRepo.getForecastData(q)
                     val forecastList = listOf(forecastData)
                     daysLiveData.value = forecastList
                 }catch (e: Exception){
                     Log.e("Tag", "Error fetching weather data: ${e.message}")
                 }
+        }
+    }
+    fun applySelectedCity(q: String){
+        viewModelScope.launch {
+            try {
+                val weatherData = currentWeatherRepo.getCurrentWeatherForCity(q)
+                weatherLiveData.value = listOf(weatherData)
+            }catch (e: Exception){
+                Log.e("Tag", "Error fetching weather data: ${e.message}", e)
+            }
         }
     }
 

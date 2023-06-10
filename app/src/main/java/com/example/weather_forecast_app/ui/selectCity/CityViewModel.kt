@@ -12,14 +12,12 @@ class CityViewModel: ViewModel() {
 
 
     private val cityRepo = CurrentWeatherRepo()
-    private val cityList = ArrayList<CurrentWeather>()
-    private val searchResults = ArrayList<CurrentWeather>()
     val cityLiveData = MutableLiveData<List<CurrentWeather>>()
 
-    fun getWeatherCity(q: String, appid: String, units: String){
+    fun getWeatherCity(q: String){
         viewModelScope.launch {
             try {
-                val cityData = cityRepo.getCurrentWeatherForCity(q,appid,units)
+                val cityData = cityRepo.getCurrentWeatherForCity(q)
                 cityLiveData.value = listOf(cityData)
             }catch (e: Exception){
                 Log.e("Tag", "Error fetching weather data: ${e.message}", e)

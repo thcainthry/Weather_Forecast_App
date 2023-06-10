@@ -8,21 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <EditText
-            android:id="@+id/search_bar_home"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:hint="Search"
-            android:textSize="20dp"
-            android:imeOptions="actionDone"
-            android:inputType="text"
-            android:background="@drawable/city_search"
-            android:layout_margin="20dp"
-            android:drawableEnd="@drawable/baseline_search_24"
-            />
+
         <TextView
             android:id="@+id/main_temp"
             android:layout_width="wrap_content"
@@ -35,7 +21,7 @@
             android:textSize="100sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/search_bar_home"
+            app:layout_constraintTop_toTopOf="parent"
             />
         <TextView
             android:layout_width="wrap_content"

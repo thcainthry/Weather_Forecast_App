@@ -22,10 +22,10 @@ import com.example.weather_forecast_app.MainActivity
 import com.example.weather_forecast_app.R
 import android.content.SharedPreferences
 import com.example.weather_forecast_app.databinding.HomeFragmentBinding
-import com.example.weather_forecast_app.domain.models.FiveDayForecast
+import com.example.weather_forecast_app.ui.RecyclerViewItemClick
 import java.util.*
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(),RecyclerViewItemClick {
     interface CityNameListener{
         fun onCityNameEntered(cityName: String)
     }
@@ -73,20 +73,6 @@ class HomeFragment : Fragment() {
             }
         })
 
-            searchBarHome.setOnEditorActionListener { _, actionId, _ ->
-                searchBarHome.visibility = View.VISIBLE
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    var query = binding.searchBarHome.text.toString().trim()
-                    homeViewModel.getCurrentWeather(query, "3fd109d206c33b68e4b21397d3cf9943","metric")
-                    homeViewModel.getForecastData(query,"3fd109d206c33b68e4b21397d3cf9943")
-                    val inputMethodManager =
-                        requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    inputMethodManager.hideSoftInputFromWindow(binding.searchBarHome.windowToken, 0)
-                    return@setOnEditorActionListener true
-                }
-                false
-
-            }
 
 
         binding.threeHour.setOnClickListener {
@@ -95,6 +81,7 @@ class HomeFragment : Fragment() {
         }
 
     }
+
 
     private fun observeViewModel(){
         homeViewModel.weatherLiveData.observe(viewLifecycleOwner){
@@ -145,6 +132,10 @@ class HomeFragment : Fragment() {
         val editor: SharedPreferences.Editor = sharedPref.edit()
         editor.putString("CITY_NAME",data)
         editor.apply()
+    }
+
+    override fun onItemClicked(name: String) {
+        homeViewModel.getCurrentWeather(name)
     }
 
 }

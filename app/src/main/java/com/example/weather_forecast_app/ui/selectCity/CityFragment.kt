@@ -11,16 +11,21 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.weather_forecast_app.R
 import com.example.weather_forecast_app.databinding.CitySearchAddBinding
+import com.example.weather_forecast_app.domain.models.CurrentWeather
+import com.example.weather_forecast_app.ui.RecyclerViewItemClick
+import com.example.weather_forecast_app.ui.home.HomeViewModel
 
-class CityFragment : Fragment() {
+class CityFragment : Fragment(),RecyclerViewItemClick  {
     lateinit var binding: CitySearchAddBinding
-    private val adapter = CityAdapter()
+    private lateinit var adapter: CityAdapter
     private lateinit var layoutManager: LinearLayoutManager
-    private val viewModel: CityViewModel by viewModels()
+    private val viewModel: HomeViewModel by viewModels()
 
 
 
@@ -42,6 +47,7 @@ class CityFragment : Fragment() {
         observeViewModel()
         with(binding) {
             binding.cityList.layoutManager = LinearLayoutManager(activity)
+            adapter = CityAdapter(this@CityFragment)
             binding.cityList.adapter = adapter
             cityList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -49,29 +55,28 @@ class CityFragment : Fragment() {
                 }
             })
 
-            searchBar.addTextChangedListener(object : TextWatcher{
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
+            searchBar.setOnEditorActionListener { _, actionId, _ ->
+                searchBar.visibility = View.VISIBLE
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    var query = binding.searchBar.text.toString().trim()
+                    viewModel.getWeatherCity(query)
+                    val inputMethodManager =
+                        requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    inputMethodManager.hideSoftInputFromWindow(binding.searchBar.windowToken, 0)
+                    return@setOnEditorActionListener true
                 }
+                false
 
-                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    val query = binding.searchBar.text.toString()
-                    if (query.isNotEmpty()){
-                        viewModel.getWeatherCity(query, "3fd109d206c33b68e4b21397d3cf9943","metric")
-                    }
-                }
-
-                override fun afterTextChanged(p0: Editable?) {
-
-                }
-            })
+            }
         }
 
+    }
 
-
-
-
-
+    private fun goBackHome(){
+        findNavController().navigate(
+            R.id.action_cityFragment_to_homeFragment
+        )
     }
 
     private fun observeViewModel() {
@@ -82,6 +87,11 @@ class CityFragment : Fragment() {
         }
 
 
+    }
+
+    override fun onItemClicked(name: String) {
+        goBackHome()
+        viewModel.applySelectedCity(name)
     }
 
 

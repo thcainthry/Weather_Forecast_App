@@ -17,6 +17,6 @@ class FiveDayRepository {
         apiService = retrofit.create(ApiService::class.java)
     }
 
-    suspend fun getForecastData(q: String,appid:String):
-            FiveDayForecast = apiService.getForecastData(q,appid)
+    suspend fun getForecastData(q: String):
+            FiveDayForecast = apiService.getForecastData(q)
 }

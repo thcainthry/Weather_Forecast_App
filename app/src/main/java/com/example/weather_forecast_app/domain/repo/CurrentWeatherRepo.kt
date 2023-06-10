@@ -16,6 +16,6 @@ class CurrentWeatherRepo {
         apiService = retrofit.create(ApiService::class.java)
     }
 
-    suspend fun getCurrentWeatherForCity(q: String,appid:String, units: String):
-            CurrentWeather = apiService.getCurrentWeatherForCity(q,appid,units)
+    suspend fun getCurrentWeatherForCity(q: String):
+            CurrentWeather = apiService.getCurrentWeatherForCity(q)
 }
