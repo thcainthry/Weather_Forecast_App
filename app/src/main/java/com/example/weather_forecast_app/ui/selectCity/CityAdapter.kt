@@ -1,8 +1,7 @@
 package com.example.weather_forecast_app.ui.selectCity
 
-import android.content.SharedPreferences
+
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
@@ -10,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weather_forecast_app.R
 import com.example.weather_forecast_app.databinding.CityItemBinding
 import com.example.weather_forecast_app.domain.models.CurrentWeather
-import com.example.weather_forecast_app.domain.models.MainFive
+
 
 class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>(){
 
@@ -39,9 +38,9 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>(){
             val city = cities[position]
             with(holder.binding){
                 cityName.text = city.name
-                mainTempCity.text = city.main?.temp.toString()?.substring(0,2)
-                lowTempCity.text = city.main?.tempMin.toString()?.substring(0,2)
-                highTempCity.text= city.main?.tempMax.toString()?.substring(0,2)
+                mainTempCity.text = city.main?.temp.toString().substring(0,2)
+                lowTempCity.text = city.main?.tempMin.toString().substring(0,2)
+                highTempCity.text= city.main?.tempMax.toString().substring(0,2)
                 cityName.setOnClickListener {
                     val bundleCityName = bundleOf(Pair("city_name_data" , city.name.toString()))
                     holder.itemView.findNavController().navigate(

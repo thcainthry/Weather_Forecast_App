@@ -6,15 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weather_forecast_app.domain.models.CurrentWeather
 import com.example.weather_forecast_app.domain.models.FiveDayForecast
-import com.example.weather_forecast_app.domain.models.Weather
 import com.example.weather_forecast_app.domain.repo.CurrentWeatherRepo
-import com.example.weather_forecast_app.domain.repo.FiveDayRepository
 import kotlinx.coroutines.launch
 
 class HomeViewModel: ViewModel() {
 
     private val currentWeatherRepo = CurrentWeatherRepo()
-    private val forecastRepo = FiveDayRepository()
     val weatherLiveData = MutableLiveData<List<CurrentWeather>>()
     val daysLiveData = MutableLiveData<List<FiveDayForecast>>()
 
@@ -44,26 +41,5 @@ class HomeViewModel: ViewModel() {
         }
     }
 
-    fun getForecastData(q: String){
-        viewModelScope.launch {
-                try {
-                    val forecastData = forecastRepo.getForecastData(q)
-                    val forecastList = listOf(forecastData)
-                    daysLiveData.value = forecastList
-                }catch (e: Exception){
-                    Log.e("Tag", "Error fetching weather data: ${e.message}")
-                }
-        }
-    }
-    fun applySelectedCity(q: String){
-        viewModelScope.launch {
-            try {
-                val weatherData = currentWeatherRepo.getCurrentWeatherForCity(q)
-                weatherLiveData.value = listOf(weatherData)
-            }catch (e: Exception){
-                Log.e("Tag", "Error fetching weather data: ${e.message}", e)
-            }
-        }
-    }
 
 }

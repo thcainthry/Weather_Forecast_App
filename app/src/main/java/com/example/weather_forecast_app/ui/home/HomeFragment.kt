@@ -1,28 +1,21 @@
 package com.example.weather_forecast_app.ui.home
 
 import android.content.Context
-import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
-import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weather_forecast_app.MainActivity
 import com.example.weather_forecast_app.R
 import android.content.SharedPreferences
 import com.example.weather_forecast_app.databinding.HomeFragmentBinding
-import com.squareup.picasso.Picasso
 import java.util.*
 
 class HomeFragment : Fragment(){
@@ -42,7 +35,7 @@ class HomeFragment : Fragment(){
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = HomeFragmentBinding.inflate(
             layoutInflater,
             container, false)
@@ -95,9 +88,9 @@ class HomeFragment : Fragment(){
                val sunset = weatherData.sys?.sunset?:0
                val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
 
-               binding.mainTemp.text = weatherData.main?.temp.toString()?.substring(0,2)
-               binding.highTemp.text = weatherData.main?.tempMax.toString()?.substring(0,2)
-               binding.lowTemp.text = weatherData.main?.tempMin.toString()?.substring(0,2)
+               binding.mainTemp.text = weatherData.main?.temp.toString().substring(0,2)
+               binding.highTemp.text = weatherData.main?.tempMax.toString().substring(0,2)
+               binding.lowTemp.text = weatherData.main?.tempMin.toString().substring(0,2)
                binding.cityHome.text = weatherData.name.toString()
                binding.pressureNr.text = weatherData.main?.pressure.toString()
                binding.humidityNr.text = weatherData.main?.humidity.toString()
