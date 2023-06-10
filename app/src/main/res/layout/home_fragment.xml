@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
+    android:scaleType="centerCrop"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -45,6 +46,15 @@
             app:layout_constraintBottom_toTopOf="@+id/weather_condition"
             app:layout_constraintTop_toBottomOf="@+id/main_temp"
             app:layout_constraintEnd_toEndOf="@+id/main_temp"
+            />
+        <ImageView
+            android:id="@+id/weather_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toStartOf="@+id/weather_condition"
+            app:layout_constraintTop_toTopOf="@+id/weather_condition"
+            app:layout_constraintBottom_toBottomOf="@+id/weather_condition"
             />
         <TextView
             android:id="@+id/weather_condition"

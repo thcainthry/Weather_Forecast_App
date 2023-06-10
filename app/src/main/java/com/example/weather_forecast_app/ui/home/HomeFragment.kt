@@ -22,6 +22,7 @@ import com.example.weather_forecast_app.MainActivity
 import com.example.weather_forecast_app.R
 import android.content.SharedPreferences
 import com.example.weather_forecast_app.databinding.HomeFragmentBinding
+import com.squareup.picasso.Picasso
 import java.util.*
 
 class HomeFragment : Fragment(){
@@ -106,8 +107,53 @@ class HomeFragment : Fragment(){
                binding.weatherCondition.text = weatherData.weather[0].description.toString()
                saveData(weatherData.wind?.speed.toString())
                cityNameListener?.onCityNameEntered(cityName = weatherData.name.toString())
-
-
+               when(weatherData.weather[0].main){
+                   "Thunderstorm" -> {
+                       binding.root.setBackgroundResource(R.drawable.thunderstorm)
+                   }
+                   "Drizzle" -> {
+                       binding.root.setBackgroundResource(R.drawable.drizzle)
+                   }
+                   "Rain" -> {
+                       binding.root.setBackgroundResource(R.drawable.rain)
+                   }
+                   "Snow" -> {
+                       binding.root.setBackgroundResource(R.drawable.snow)
+                   }
+                   "Clear" -> {
+                       binding.root.setBackgroundResource(R.drawable.clear)
+                   }
+                   "Clouds" -> {
+                       binding.root.setBackgroundResource(R.drawable.background)
+                   }
+                   "Mist" -> {
+                       binding.root.setBackgroundResource(R.drawable.mist)
+                   }
+                   "Smoke" -> {
+                       binding.root.setBackgroundResource(R.drawable.smoke)
+                   }
+                   "Haze" -> {
+                       binding.root.setBackgroundResource(R.drawable.haze)
+                   }
+                   "Fog" -> {
+                       binding.root.setBackgroundResource(R.drawable.fog)
+                   }
+                   "Dust" -> {
+                       binding.root.setBackgroundResource(R.drawable.dust)
+                   }
+                   "Sand" -> {
+                       binding.root.setBackgroundResource(R.drawable.sand)
+                   }
+                   "Ash" -> {
+                       binding.root.setBackgroundResource(R.drawable.ash)
+                   }
+                   "Squall" -> {
+                       binding.root.setBackgroundResource(R.drawable.squall)
+                   }
+                   "Tornado" -> {
+                       binding.root.setBackgroundResource(R.drawable.tornado)
+                   }
+               }
            }
         }
 
