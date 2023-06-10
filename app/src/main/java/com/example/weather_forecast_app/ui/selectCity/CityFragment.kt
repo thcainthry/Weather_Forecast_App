@@ -18,12 +18,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weather_forecast_app.R
 import com.example.weather_forecast_app.databinding.CitySearchAddBinding
 import com.example.weather_forecast_app.domain.models.CurrentWeather
-import com.example.weather_forecast_app.ui.RecyclerViewItemClick
 import com.example.weather_forecast_app.ui.home.HomeViewModel
 
-class CityFragment : Fragment(),RecyclerViewItemClick  {
+class CityFragment : Fragment() {
     lateinit var binding: CitySearchAddBinding
-    private lateinit var adapter: CityAdapter
+    private val adapter = CityAdapter()
     private lateinit var layoutManager: LinearLayoutManager
     private val viewModel: HomeViewModel by viewModels()
 
@@ -47,7 +46,6 @@ class CityFragment : Fragment(),RecyclerViewItemClick  {
         observeViewModel()
         with(binding) {
             binding.cityList.layoutManager = LinearLayoutManager(activity)
-            adapter = CityAdapter(this@CityFragment)
             binding.cityList.adapter = adapter
             cityList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -87,11 +85,6 @@ class CityFragment : Fragment(),RecyclerViewItemClick  {
         }
 
 
-    }
-
-    override fun onItemClicked(name: String) {
-        goBackHome()
-        viewModel.applySelectedCity(name)
     }
 
 

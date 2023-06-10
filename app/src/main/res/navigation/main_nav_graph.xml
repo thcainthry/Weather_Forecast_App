@@ -17,9 +17,9 @@
             android:id="@+id/action_homeFragment_to_cityFragment"
             app:destination="@id/cityFragment" />
         <argument
-            android:name="city"
+            android:name="city_name_data"
             app:argType="string"
-            android:defaultValue=" "
+            android:defaultValue="city_name_default"
             app:nullable="true" />
     </fragment>
     <fragment
@@ -43,13 +43,15 @@
         android:label="CityFragment"
         tools:layout="@layout/city_search_add"
         >
-        <argument
-            android:name="city"
-            android:defaultValue="default_id"
-            app:argType="string"
-            app:nullable="true" />
         <action
             android:id="@+id/action_cityFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+            <argument
+                android:name="city_name"
+                app:argType="string"
+                android:defaultValue=" "
+                app:nullable="true"
+                />
+
     </fragment>
 </navigation>

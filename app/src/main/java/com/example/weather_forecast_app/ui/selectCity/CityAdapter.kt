@@ -2,16 +2,17 @@ package com.example.weather_forecast_app.ui.selectCity
 
 import android.content.SharedPreferences
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.weather_forecast_app.R
 import com.example.weather_forecast_app.databinding.CityItemBinding
 import com.example.weather_forecast_app.domain.models.CurrentWeather
 import com.example.weather_forecast_app.domain.models.MainFive
-import com.example.weather_forecast_app.ui.RecyclerViewItemClick
 
-class CityAdapter(
-    private val recycleViewItemClick: RecyclerViewItemClick
-) : RecyclerView.Adapter<CityAdapter.ViewHolder>(){
+class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>(){
 
 
     var cities: List<CurrentWeather> = emptyList()
@@ -41,8 +42,12 @@ class CityAdapter(
                 mainTempCity.text = city.main?.temp.toString()?.substring(0,2)
                 lowTempCity.text = city.main?.tempMin.toString()?.substring(0,2)
                 highTempCity.text= city.main?.tempMax.toString()?.substring(0,2)
-                holder.itemView.setOnClickListener{
-                    recycleViewItemClick.onItemClicked(city.name.toString())
+                cityName.setOnClickListener {
+                    val bundleCityName = bundleOf(Pair("city_name_data" , city.name.toString()))
+                    holder.itemView.findNavController().navigate(
+                        R.id.action_cityFragment_to_homeFragment,
+                        bundleCityName
+                    )
                 }
             }
 
@@ -51,6 +56,7 @@ class CityAdapter(
 
         }
     override fun getItemCount(): Int = cities.size
+
 
 
 }

@@ -22,10 +22,9 @@ import com.example.weather_forecast_app.MainActivity
 import com.example.weather_forecast_app.R
 import android.content.SharedPreferences
 import com.example.weather_forecast_app.databinding.HomeFragmentBinding
-import com.example.weather_forecast_app.ui.RecyclerViewItemClick
 import java.util.*
 
-class HomeFragment : Fragment(),RecyclerViewItemClick {
+class HomeFragment : Fragment(){
     interface CityNameListener{
         fun onCityNameEntered(cityName: String)
     }
@@ -63,6 +62,8 @@ class HomeFragment : Fragment(),RecyclerViewItemClick {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val cityNameData = args.cityNameData
+        homeViewModel.getCurrentWeather(cityNameData.toString())
         observeViewModel()
         with(binding){
         binding.fiveRecycleList.layoutManager =  LinearLayoutManager(activity)
@@ -134,9 +135,7 @@ class HomeFragment : Fragment(),RecyclerViewItemClick {
         editor.apply()
     }
 
-    override fun onItemClicked(name: String) {
-        homeViewModel.getCurrentWeather(name)
-    }
+
 
 }
 
