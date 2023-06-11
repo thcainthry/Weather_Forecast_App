@@ -9,8 +9,10 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.weather_forecast_app.R
 import com.example.weather_forecast_app.databinding.CitySearchAddBinding
 import com.example.weather_forecast_app.ui.home.HomeViewModel
 
@@ -43,6 +45,12 @@ class CityFragment : Fragment() {
                     super.onScrolled(recyclerView, dx, dy)
                 }
             })
+            binding.favorite.setOnClickListener{
+                findNavController().navigate(R.id.action_cityFragment_to_favouriteFragment)
+            }
+            binding.goBackHome.setOnClickListener {
+                findNavController().navigate(R.id.action_cityFragment_to_homeFragment)
+            }
 
             searchBar.setOnEditorActionListener { _, actionId, _ ->
                 searchBar.visibility = View.VISIBLE

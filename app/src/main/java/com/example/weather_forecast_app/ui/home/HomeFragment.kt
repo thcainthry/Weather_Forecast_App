@@ -1,6 +1,7 @@
 package com.example.weather_forecast_app.ui.home
 
 import android.content.Context
+import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,12 +20,6 @@ import com.example.weather_forecast_app.databinding.HomeFragmentBinding
 import java.util.*
 
 class HomeFragment : Fragment(){
-    interface CityNameListener{
-        fun onCityNameEntered(cityName: String)
-    }
-    private var cityNameListener: CityNameListener? = null
-
-
     lateinit var binding: HomeFragmentBinding
     private val adapter = HomeAdapter()
     private val homeViewModel: HomeViewModel by viewModels()
@@ -44,15 +39,6 @@ class HomeFragment : Fragment(){
 
     }
 
-    override fun onAttach(context: Context){
-        super.onAttach(context)
-        cityNameListener = context as? CityNameListener
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        cityNameListener = null
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,8 +54,16 @@ class HomeFragment : Fragment(){
             }
         })
 
-
-
+            binding.more.setOnClickListener{
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.putExtra(Intent.EXTRA_TEXT,"")
+                intent.type = "text/plain"
+                val shareIntent = Intent.createChooser(intent,null)
+                startActivity(shareIntent)
+            }
+        binding.addLocation.setOnClickListener {
+            findNavController().navigate((R.id.action_homeFragment_to_cityFragment))
+        }
         binding.threeHour.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_action_fragment_three)
             }
@@ -98,8 +92,8 @@ class HomeFragment : Fragment(){
                binding.sunrise.text = timeFormat.format(Date(sunrise*1000L)).toString()
                binding.sunset.text =  timeFormat.format(Date(sunset*1000L)).toString()
                binding.weatherCondition.text = weatherData.weather[0].description.toString()
-               saveData(weatherData.wind?.speed.toString())
-               cityNameListener?.onCityNameEntered(cityName = weatherData.name.toString())
+               binding.cityLocation.text = weatherData.name.toString()
+
                when(weatherData.weather[0].main){
                    "Thunderstorm" -> {
                        binding.root.setBackgroundResource(R.drawable.thunderstorm)
@@ -167,14 +161,6 @@ class HomeFragment : Fragment(){
                 }
         }
     }
-    private fun saveData(data: String){
-        val sharedPref: SharedPreferences = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        val editor: SharedPreferences.Editor = sharedPref.edit()
-        editor.putString("CITY_NAME",data)
-        editor.apply()
-    }
-
-
 
 }
 

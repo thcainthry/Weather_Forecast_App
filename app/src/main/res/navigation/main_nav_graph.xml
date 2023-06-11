@@ -52,6 +52,22 @@
                 android:defaultValue=" "
                 app:nullable="true"
                 />
+        <action
+            android:id="@+id/action_cityFragment_to_favouriteFragment"
+            app:destination="@id/favouriteFragment" />
 
+    </fragment>
+    <fragment
+        android:id="@+id/favouriteFragment"
+        android:name="com.example.weather_forecast_app.ui.favourites.FavouriteFragment"
+        android:label="FavouriteFragment"
+        tools:layout="@layout/favourite_fragment_b"
+        >
+        <action
+            android:id="@+id/action_favouriteFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_favouriteFragment_to_cityFragment"
+            app:destination="@id/cityFragment" />
     </fragment>
 </navigation>

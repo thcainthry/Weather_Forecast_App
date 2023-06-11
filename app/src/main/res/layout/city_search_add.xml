@@ -6,6 +6,16 @@
     android:background="@drawable/background"
 
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@+id/go_back_home"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/arrow_back"
+        android:layout_margin="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/manage"
+        app:layout_constraintBottom_toBottomOf="@+id/manage"
+        />
     <TextView
         android:id="@+id/manage"
         android:layout_width="wrap_content"
@@ -14,8 +24,18 @@
         android:text="Manage cities"
         android:layout_margin="20dp"
         android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/go_back_home"
         app:layout_constraintTop_toTopOf="parent"
+        />
+    <ImageView
+        android:id="@+id/favorite"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/manage"
+        app:layout_constraintBottom_toBottomOf="@id/manage"
+        android:layout_margin="15dp"
+        android:src="@drawable/favorite"
         />
     <EditText
         android:id="@+id/search_bar"
