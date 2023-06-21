@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weather_forecast_app.R
 import android.content.SharedPreferences
 import android.net.Uri
+import androidx.core.os.bundleOf
 import com.example.weather_forecast_app.databinding.HomeFragmentBinding
 import java.util.*
 
@@ -62,12 +63,14 @@ class HomeFragment : Fragment(){
                 val shareIntent = Intent.createChooser(intent,null)
                 startActivity(shareIntent)
             }
+
         binding.addLocation.setOnClickListener {
             findNavController().navigate((R.id.action_homeFragment_to_cityFragment))
         }
         binding.threeHour.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_action_fragment_three)
             }
+
         }
 
     }
@@ -88,6 +91,16 @@ class HomeFragment : Fragment(){
 
                if (lat != null && lon != null) {
                    homeViewModel.getAIRPollution(lat,lon)
+                   binding.moreDetailsAqi.setOnClickListener {
+                       val bundleData = bundleOf(
+                           Pair("lat",lat.toString()),
+                           Pair("lon",lon.toString())
+                       )
+                       findNavController().navigate(
+                           R.id.action_homeFragment_to_airQualityFragment,
+                           bundleData
+                       )
+                   }
                }
 
                binding.mainTemp.text = weatherData.main?.temp.toString().substring(0,2)

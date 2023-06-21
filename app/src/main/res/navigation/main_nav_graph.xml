@@ -21,6 +21,21 @@
             app:argType="string"
             android:defaultValue="city_name_default"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_homeFragment_to_airQualityFragment"
+            app:destination="@id/airQualityFragment" />
+            <argument
+                android:name="lat"
+                app:argType="string"
+                android:defaultValue=" "
+                app:nullable="true"
+                />
+            <argument
+                android:name="lon"
+                app:argType="string"
+                android:defaultValue=" "
+                app:nullable="true"
+                />
     </fragment>
     <fragment
         android:id="@+id/action_fragment_three"
@@ -69,5 +84,25 @@
         <action
             android:id="@+id/action_favouriteFragment_to_cityFragment"
             app:destination="@id/cityFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/airQualityFragment"
+        android:name="com.example.weather_forecast_app.ui.airQuality.AirQualityFragment"
+        android:label="AirQualityFragment"
+        tools:layout="@layout/air_pollution"
+        >
+        <argument
+            android:name="lat"
+            app:argType="string"
+            android:defaultValue="lat"
+            app:nullable="true" />
+        <argument
+            android:name="lon"
+            app:argType="string"
+            android:defaultValue="lon"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_airQualityFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>
