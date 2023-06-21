@@ -4,10 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather_forecast_app.databinding.ItemFiveDayBinding
-import com.example.weather_forecast_app.domain.models.CurrentWeather
-import com.example.weather_forecast_app.domain.models.FiveDayForecast
-import com.example.weather_forecast_app.domain.models.MainFive
-import com.example.weather_forecast_app.domain.models.WeatherFive
+import com.example.weather_forecast_app.domain.models.*
 
 class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
@@ -18,6 +15,12 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
         }
 
     var days: List<FiveDayForecast> = emptyList()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
+    var aqi: List<AQI> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()

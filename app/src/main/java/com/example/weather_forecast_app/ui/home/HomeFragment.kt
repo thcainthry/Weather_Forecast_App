@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather_forecast_app.R
 import android.content.SharedPreferences
+import android.net.Uri
 import com.example.weather_forecast_app.databinding.HomeFragmentBinding
 import java.util.*
 
@@ -81,6 +82,13 @@ class HomeFragment : Fragment(){
                val sunrise = weatherData.sys?.sunrise?:0
                val sunset = weatherData.sys?.sunset?:0
                val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+               val moreD = weatherData.id.toString()
+               val lat = weatherData.coord?.lat?.toInt()
+               val lon = weatherData.coord?.lon?.toInt()
+
+               if (lat != null && lon != null) {
+                   homeViewModel.getAIRPollution(lat,lon)
+               }
 
                binding.mainTemp.text = weatherData.main?.temp.toString().substring(0,2)
                binding.highTemp.text = weatherData.main?.tempMax.toString().substring(0,2)
@@ -93,6 +101,11 @@ class HomeFragment : Fragment(){
                binding.sunset.text =  timeFormat.format(Date(sunset*1000L)).toString()
                binding.weatherCondition.text = weatherData.weather[0].description.toString()
                binding.cityLocation.text = weatherData.name.toString()
+
+               binding.moreDetails.setOnClickListener {
+                   val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://openweathermap.org/city/$moreD"))
+                   startActivity(browserIntent)
+               }
 
                when(weatherData.weather[0].main){
                    "Thunderstorm" -> {
@@ -144,6 +157,16 @@ class HomeFragment : Fragment(){
            }
         }
 
+        homeViewModel.aqiLiveData.observe(viewLifecycleOwner){
+            aqiList ->
+                adapter.aqi = aqiList
+                adapter.notifyDataSetChanged()
+            if (aqiList.isNotEmpty()){
+                val aqiData = aqiList[0]
+                binding.aqiNr.text = aqiData.list[0].main?.aqi.toString()
+            }
+        }
+
         homeViewModel.daysLiveData.observe(viewLifecycleOwner){
             forecastList ->
                 adapter.days = forecastList
@@ -160,6 +183,7 @@ class HomeFragment : Fragment(){
                     }
                 }
         }
+
     }
 
 }

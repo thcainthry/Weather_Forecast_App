@@ -22,4 +22,11 @@ interface ApiService {
         @Query("dt") dt: Int,
         @Query ("temp") temp: Double,
     ): List<FiveDayForecast>
+
+    @GET("air_pollution")
+    suspend fun getAIRPollution(
+        @Query("lat") lat: Int,
+        @Query("lon") lon: Int,
+        @Query("appid") appid: String = "3fd109d206c33b68e4b21397d3cf9943"
+    ): AQI
 }
