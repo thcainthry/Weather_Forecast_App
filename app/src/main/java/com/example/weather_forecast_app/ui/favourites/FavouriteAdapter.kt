@@ -1,13 +1,24 @@
 package com.example.weather_forecast_app.ui.favourites
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather_forecast_app.databinding.FavouriteItemBinding
 
-class FavouriteAdapter : RecyclerView.Adapter<FavouriteAdapter.ViewHolder>() {
+class FavouriteAdapter(private val context: Context) : RecyclerView.Adapter<FavouriteAdapter.ViewHolder>() {
 
+    private lateinit var sharedPreferences: SharedPreferences
+    private var cities: List<String?> = emptyList()
+    init{
+        sharedPreferences = context.getSharedPreferences("Favourites", Context.MODE_PRIVATE)
+    }
 
+    fun setCities(cityList: List<String?>?){
+        cities = cityList?: emptyList()
+        notifyDataSetChanged()
+    }
     inner class ViewHolder(val binding: FavouriteItemBinding ):
         RecyclerView.ViewHolder(binding.root)
 
@@ -22,8 +33,9 @@ class FavouriteAdapter : RecyclerView.Adapter<FavouriteAdapter.ViewHolder>() {
             }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
+            val city = cities[position]
+            holder.binding.cityName.text = city
     }
 
-    override fun getItemCount(): Int = 10
+    override fun getItemCount(): Int = cities.size
 }

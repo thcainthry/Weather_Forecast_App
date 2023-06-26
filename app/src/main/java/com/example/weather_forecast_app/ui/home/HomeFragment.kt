@@ -38,15 +38,20 @@ class HomeFragment : Fragment(){
             container, false)
 
         return binding.root
-
     }
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val cityNameData = args.cityNameData
-        homeViewModel.getCurrentWeather(cityNameData.toString())
-        observeViewModel()
+        val cityNameBundle = args.cityData
+        if (cityNameBundle != null || cityNameData != null ){
+            homeViewModel.getCurrentWeather(cityNameData.toString())
+            homeViewModel.getCurrentWeather(cityNameBundle.toString())
+            observeViewModel()
+        }
+
         with(binding){
         binding.fiveRecycleList.layoutManager =  LinearLayoutManager(activity)
         binding.fiveRecycleList.adapter = adapter
@@ -65,10 +70,14 @@ class HomeFragment : Fragment(){
             }
 
         binding.addLocation.setOnClickListener {
-            findNavController().navigate((R.id.action_homeFragment_to_cityFragment))
+            findNavController().navigate(
+                    R.id.action_homeFragment_to_cityFragment
+            )
         }
         binding.threeHour.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_action_fragment_three)
+            findNavController().navigate(
+                R.id.action_homeFragment_to_action_fragment_three
+            )
             }
 
         }
@@ -88,13 +97,15 @@ class HomeFragment : Fragment(){
                val moreD = weatherData.id.toString()
                val lat = weatherData.coord?.lat?.toInt()
                val lon = weatherData.coord?.lon?.toInt()
+               val cityN = weatherData.name.toString()
 
                if (lat != null && lon != null) {
                    homeViewModel.getAIRPollution(lat,lon)
                    binding.moreDetailsAqi.setOnClickListener {
                        val bundleData = bundleOf(
                            Pair("lat",lat.toString()),
-                           Pair("lon",lon.toString())
+                           Pair("lon",lon.toString()),
+                           Pair("city_data",cityN)
                        )
                        findNavController().navigate(
                            R.id.action_homeFragment_to_airQualityFragment,
@@ -106,14 +117,14 @@ class HomeFragment : Fragment(){
                binding.mainTemp.text = weatherData.main?.temp.toString().substring(0,2)
                binding.highTemp.text = weatherData.main?.tempMax.toString().substring(0,2)
                binding.lowTemp.text = weatherData.main?.tempMin.toString().substring(0,2)
-               binding.cityHome.text = weatherData.name.toString()
+               binding.cityHome.text = cityN
                binding.pressureNr.text = weatherData.main?.pressure.toString()
                binding.humidityNr.text = weatherData.main?.humidity.toString()
                binding.windSpeedD.text = weatherData.wind?.speed.toString()
                binding.sunrise.text = timeFormat.format(Date(sunrise*1000L)).toString()
                binding.sunset.text =  timeFormat.format(Date(sunset*1000L)).toString()
                binding.weatherCondition.text = weatherData.weather[0].description.toString()
-               binding.cityLocation.text = weatherData.name.toString()
+               binding.cityLocation.text = cityN
 
                binding.moreDetails.setOnClickListener {
                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://openweathermap.org/city/$moreD"))

@@ -1,5 +1,6 @@
 package com.example.weather_forecast_app.ui.favourites
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,7 @@ import com.example.weather_forecast_app.databinding.FavouriteFragmentBBinding
 
 class FavouriteFragment : Fragment() {
     lateinit var binding: FavouriteFragmentBBinding
-    private val adapter = FavouriteAdapter()
+    private lateinit var adapter: FavouriteAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +31,12 @@ class FavouriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         with(binding){
             binding.favList.layoutManager = LinearLayoutManager(activity)
+            adapter = FavouriteAdapter(requireContext())
             binding.favList.adapter = adapter
+
+            val sharedPrefs = requireContext().getSharedPreferences("Favourites",Context.MODE_PRIVATE)
+            val favouriteCities = sharedPrefs.getStringSet("cities",HashSet<String>())?.toList()
+            adapter.setCities(favouriteCities as List<String?>?)
 
             binding.goBackCity.setOnClickListener{
                 findNavController().navigate(R.id.action_favouriteFragment_to_cityFragment)

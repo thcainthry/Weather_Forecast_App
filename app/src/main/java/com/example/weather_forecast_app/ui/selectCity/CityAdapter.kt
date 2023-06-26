@@ -1,6 +1,8 @@
 package com.example.weather_forecast_app.ui.selectCity
 
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
@@ -11,7 +13,8 @@ import com.example.weather_forecast_app.databinding.CityItemBinding
 import com.example.weather_forecast_app.domain.models.CurrentWeather
 
 
-class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>(){
+class CityAdapter(private val sharedPreferences: SharedPreferences) : RecyclerView.Adapter<CityAdapter.ViewHolder>(){
+
 
 
     var cities: List<CurrentWeather> = emptyList()
@@ -35,6 +38,8 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>(){
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
+
             val city = cities[position]
             with(holder.binding){
                 cityName.text = city.name
@@ -47,6 +52,14 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>(){
                         R.id.action_cityFragment_to_homeFragment,
                         bundleCityName
                     )
+                }
+                setFavourite.setOnClickListener {
+                    val selectedCity = city.name.toString()
+                    val sharedPrefsEditor = holder.itemView.context.getSharedPreferences("Favourites", Context.MODE_PRIVATE).edit()
+                    val favouriteCities = sharedPreferences.getStringSet("cities", HashSet<String>())?.toMutableSet()
+                    favouriteCities?.add(selectedCity)
+                    sharedPrefsEditor?.putStringSet("cities",favouriteCities)
+                    sharedPrefsEditor?.apply()
                 }
             }
 

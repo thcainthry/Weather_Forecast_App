@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -34,12 +35,17 @@ class AirQualityFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val lat = args.lat?.toInt()
         val lon = args.lon?.toInt()
+        val cityData = args.cityData
         if (lat != null && lon != null) {
             airViewModel.getAIRPollution(lat, lon)
         }
         observeViewModel()
         binding.goBackAir.setOnClickListener {
-            findNavController().navigate(R.id.action_airQualityFragment_to_homeFragment)
+            val bundleCityName = bundleOf(Pair("city_data",cityData))
+            findNavController().navigate(
+                R.id.action_airQualityFragment_to_homeFragment,
+                bundleCityName
+            )
         }
     }
     private fun observeViewModel(){

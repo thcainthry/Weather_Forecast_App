@@ -343,12 +343,13 @@
         android:id="@+id/other_info"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginEnd="13dp"
         app:cardCornerRadius="15dp"
         android:backgroundTint="#3E000000"
         app:cardElevation="2dp"
         app:layout_constraintTop_toTopOf="@id/sunrise_sunset"
         app:layout_constraintEnd_toEndOf="@+id/three_hour"
-        app:layout_constraintStart_toEndOf="@+id/sunrise_sunset"
+        app:layout_constraintBottom_toBottomOf="@+id/wind_direction"
         >
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -532,9 +533,9 @@
         android:layout_marginTop="5dp"
         android:backgroundTint="#3E000000"
         app:cardElevation="2dp"
-        app:layout_constraintStart_toStartOf="@+id/sunrise_sunset"
+        app:layout_constraintStart_toStartOf="@+id/three_hour"
         app:layout_constraintTop_toBottomOf="@+id/sunrise_sunset"
-        app:layout_constraintEnd_toEndOf="@+id/sunrise_sunset"
+        app:layout_constraintEnd_toStartOf="@+id/other_info"
         >
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
