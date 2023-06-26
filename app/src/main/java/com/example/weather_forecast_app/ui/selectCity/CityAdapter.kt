@@ -38,14 +38,16 @@ class CityAdapter(private val sharedPreferences: SharedPreferences) : RecyclerVi
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-
             val city = cities[position]
             with(holder.binding){
                 cityName.text = city.name
                 mainTempCity.text = city.main?.temp.toString().substring(0,2)
                 lowTempCity.text = city.main?.tempMin.toString().substring(0,2)
                 highTempCity.text= city.main?.tempMax.toString().substring(0,2)
+
+                val cityNameBoolean = city.name.toString()
+                val isCityFavourite = isCityFavourite(cityNameBoolean)
+
                 cityName.setOnClickListener {
                     val bundleCityName = bundleOf(Pair("city_name_data" , city.name.toString()))
                     holder.itemView.findNavController().navigate(
@@ -57,9 +59,24 @@ class CityAdapter(private val sharedPreferences: SharedPreferences) : RecyclerVi
                     val selectedCity = city.name.toString()
                     val sharedPrefsEditor = holder.itemView.context.getSharedPreferences("Favourites", Context.MODE_PRIVATE).edit()
                     val favouriteCities = sharedPreferences.getStringSet("cities", HashSet<String>())?.toMutableSet()
-                    favouriteCities?.add(selectedCity)
+                    if (isCityFavourite){
+                        favouriteCities?.remove(selectedCity)
+                        setFavourite.setImageResource(R.drawable.set_fav)
+                    }else{
+                        favouriteCities?.add(selectedCity)
+                        setFavourite.setImageResource(R.drawable.favorite)
+                    }
                     sharedPrefsEditor?.putStringSet("cities",favouriteCities)
                     sharedPrefsEditor?.apply()
+                }
+
+                val selectedCity = city.name.toString()
+                val isFavourite = isCityFavourite(selectedCity)
+
+                if (isFavourite){
+                    setFavourite.setImageResource(R.drawable.favorite)
+                }else{
+                    setFavourite.setImageResource(R.drawable.set_fav)
                 }
             }
 
@@ -68,6 +85,11 @@ class CityAdapter(private val sharedPreferences: SharedPreferences) : RecyclerVi
 
         }
     override fun getItemCount(): Int = cities.size
+
+    private fun isCityFavourite(cityName: String): Boolean{
+        val favouriteCities = sharedPreferences.getStringSet("cities", HashSet<String>())
+        return favouriteCities?.contains(cityName) ?: false
+    }
 
 
 

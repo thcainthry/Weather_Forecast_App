@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather_forecast_app.R
 import com.example.weather_forecast_app.databinding.CitySearchAddBinding
+import com.example.weather_forecast_app.ui.favourites.FavouriteAdapter
 import com.example.weather_forecast_app.ui.home.HomeViewModel
 
 class CityFragment : Fragment() {
