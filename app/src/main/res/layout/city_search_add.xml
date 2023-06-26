@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="@id/manage"
         app:layout_constraintBottom_toBottomOf="@id/manage"
         android:layout_margin="15dp"
-        android:src="@drawable/favorite"
+        android:src="@drawable/go_to_fav"
         />
     <EditText
         android:id="@+id/search_bar"

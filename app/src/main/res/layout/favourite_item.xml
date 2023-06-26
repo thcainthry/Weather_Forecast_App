@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -30,123 +31,19 @@
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:textStyle="bold"
                 />
-            <TextView
-                android:id="@+id/aqi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="AQI"
-                android:textSize="13sp"
-                android:textColor="@color/white"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="20dp"
-                app:layout_constraintStart_toStartOf="@+id/city_name"
-                app:layout_constraintTop_toBottomOf="@id/city_name"
-                app:layout_constraintBottom_toBottomOf="parent"
-                />
 
-            <TextView
-                android:id="@+id/aqi_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="29"
-                android:textSize="13sp"
-                android:layout_marginStart="5dp"
-                android:textColor="@color/white"
-                app:layout_constraintTop_toTopOf="@id/aqi"
-                app:layout_constraintStart_toEndOf="@id/aqi"
-                app:layout_constraintBottom_toBottomOf="@+id/aqi"
-                />
-            <TextView
-                android:id="@+id/low_temp_city"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="9"
-                android:textSize="13sp"
-                android:textColor="@color/white"
-                android:layout_marginStart="15dp"
-                app:layout_constraintStart_toEndOf="@+id/aqi_value"
-                app:layout_constraintTop_toTopOf="@+id/aqi_value"
-                app:layout_constraintBottom_toBottomOf="@id/aqi_value"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/dot_city_1"
-                android:text="°"
-                android:textSize="10sp"
-                android:textColor="@color/white"
-                app:layout_constraintTop_toTopOf="@+id/low_temp_city"
-                app:layout_constraintStart_toEndOf="@+id/low_temp_city"
-                />
-            <TextView
-                android:id="@+id/slash_city"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" / "
-                android:textSize="13sp"
-                android:textColor="@color/white"
-                app:layout_constraintStart_toEndOf="@+id/low_temp_city"
-                app:layout_constraintEnd_toStartOf="@+id/high_temp_city"
-                app:layout_constraintTop_toTopOf="@id/aqi"
-                app:layout_constraintBottom_toBottomOf="@id/aqi"
-                />
-
-            <TextView
-                android:id="@+id/high_temp_city"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="25"
-                android:textSize="13sp"
-                android:textColor="@color/white"
-                app:layout_constraintStart_toEndOf="@+id/slash_city"
-                app:layout_constraintTop_toTopOf="@+id/slash_city"
-                app:layout_constraintBottom_toBottomOf="@id/aqi"
-
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/dot_city_2"
-                android:text="°"
-                android:textSize="10sp"
-                android:textColor="@color/white"
-                app:layout_constraintTop_toTopOf="@+id/high_temp_city"
-                app:layout_constraintStart_toEndOf="@+id/high_temp_city"
-                />
-
-            <TextView
-                android:id="@+id/main_temp_city"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:text="23"
-                android:textColor="@color/white"
-                android:textSize="30sp"
-                app:layout_constraintEnd_toStartOf="@id/set_favourite"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
             <ImageView
                 android:id="@+id/set_favourite"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/main_temp_city"
-                app:layout_constraintBottom_toBottomOf="@id/main_temp_city"
-                android:src="@drawable/set_fav"
+                app:layout_constraintTop_toTopOf="@id/city_name"
+                app:layout_constraintBottom_toBottomOf="@id/city_name"
+                android:src="@drawable/favorite"
                 android:layout_margin="15dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/celsius"
-                android:text="°"
-                android:textStyle="bold"
-                android:textSize="30sp"
-                android:textColor="@color/white"
-                app:layout_constraintTop_toTopOf="@+id/main_temp_city"
-                app:layout_constraintStart_toEndOf="@+id/main_temp_city"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
