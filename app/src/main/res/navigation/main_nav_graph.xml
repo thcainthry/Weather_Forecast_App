@@ -18,8 +18,14 @@
         <argument
             android:name="city_name_data"
             app:argType="string"
-            android:defaultValue="city_name_default"
+            android:defaultValue=" "
             app:nullable="true" />
+        <argument
+            android:name="city_name_fav"
+            app:argType="string"
+            android:defaultValue=" "
+            app:nullable="true"
+            />
         <action
             android:id="@+id/action_homeFragment_to_airQualityFragment"
             app:destination="@id/airQualityFragment" />
@@ -89,9 +95,16 @@
         <action
             android:id="@+id/action_favouriteFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="city_name_fav"
+            app:argType="string"
+            android:defaultValue=" "
+            app:nullable="true"
+            />
         <action
             android:id="@+id/action_favouriteFragment_to_cityFragment"
             app:destination="@id/cityFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/airQualityFragment"

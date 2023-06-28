@@ -21,7 +21,7 @@ import androidx.core.os.bundleOf
 import com.example.weather_forecast_app.databinding.HomeFragmentBinding
 import java.util.*
 
-class HomeFragment : Fragment(){
+class HomeFragment : Fragment() {
     lateinit var binding: HomeFragmentBinding
     private val adapter = HomeAdapter()
     private val homeViewModel: HomeViewModel by viewModels()
@@ -35,22 +35,32 @@ class HomeFragment : Fragment(){
     ): View {
         binding = HomeFragmentBinding.inflate(
             layoutInflater,
-            container, false)
+            container, false
+        )
 
         return binding.root
     }
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val cityNameData = args.cityNameData
         val cityNameBundle = args.cityData
-        if (cityNameBundle != null || cityNameData != null ){
+        val cityNameFav = args.cityNameFav
+
+        if (!cityNameData.isNullOrEmpty() && !cityNameData.isNullOrBlank()) {
             homeViewModel.getCurrentWeather(cityNameData.toString())
-            homeViewModel.getCurrentWeather(cityNameBundle.toString())
-            observeViewModel()
         }
+
+        if (!cityNameBundle.isNullOrEmpty() && !cityNameBundle.isNullOrBlank()) {
+            homeViewModel.getCurrentWeather(cityNameBundle.toString())
+        }
+
+        if (!cityNameFav.isNullOrEmpty() && !cityNameFav.isNullOrBlank()) {
+            homeViewModel.getCurrentWeather(cityNameFav.toString())
+        }
+
+        observeViewModel()
 
         with(binding){
         binding.fiveRecycleList.layoutManager =  LinearLayoutManager(activity)

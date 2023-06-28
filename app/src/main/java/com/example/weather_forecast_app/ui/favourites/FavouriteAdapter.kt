@@ -4,7 +4,10 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.weather_forecast_app.R
 import com.example.weather_forecast_app.databinding.FavouriteItemBinding
 import com.example.weather_forecast_app.domain.models.CurrentWeather
 import com.example.weather_forecast_app.ui.home.HomeViewModel
@@ -42,6 +45,15 @@ class FavouriteAdapter(private val context: Context) : RecyclerView.Adapter<Favo
             val city = cities[position]
             with(holder.binding) {
                cityName.text = city
+               cityCard.setOnClickListener {
+                   val bundleCityNameFav = bundleOf(Pair("city_name_fav",city.toString()))
+                   holder.itemView.findNavController().navigate(
+                       R.id.action_favouriteFragment_to_homeFragment,
+                       bundleCityNameFav
+                   )
+
+               }
+
             }
     }
 
