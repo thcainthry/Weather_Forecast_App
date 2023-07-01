@@ -18,7 +18,7 @@ interface ApiService {
         @Query("q") q: String,
         @Query("appid") appid: String = "3fd109d206c33b68e4b21397d3cf9943",
         @Query("units") units: String = "metric",
-        @Query("cnt") cnt: Int = 16
+        @Query("cnt") cnt: Int = 8
     ):FiveDayForecast
 
 

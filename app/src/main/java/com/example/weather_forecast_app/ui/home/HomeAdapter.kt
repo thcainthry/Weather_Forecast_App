@@ -46,28 +46,24 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
         with(holder.binding) {
             day.text = ""
             weatherConditionDay.text = ""
-            highTempDay.text = ""
-            lowTempDay.text = ""
+            temp.text = ""
 
             for (i in 0 until forecast.list.size) {
                 val dayData = forecast.list[i]
-                val icon = dayData.weather[0].icon
-                val iconUrl = "http://openweathermap.org/img/w/$icon.png"
                 val date = formatDate(dayData.dtTxt.toString())
                 day.append(date)
                 weatherConditionDay.append(dayData.weather[0].description.toString())
-                highTempDay.append(dayData.main?.tempMax.toString().substring(0, 2))
-                lowTempDay.append(dayData.main?.tempMin.toString().substring(0, 2))
+                temp.append(dayData.main?.temp.toString().substring(0, 2))
 
-                Picasso.get().load(iconUrl).into(cloudOne)
+//                val icon = dayData.weather[0].icon
+//                val iconUrl = "http://openweathermap.org/img/w/$icon.png"
+//                Picasso.get().load(iconUrl).into(cloudOne)
 
 
-                if (i < forecast.list.size - 1) {
-                    day.append("\n")
-                    weatherConditionDay.append("\n")
-                    highTempDay.append("\n")
-                    lowTempDay.append("\n")
-
+                if (i <= forecast.list.size ) {
+                    day.append("\n\n")
+                    weatherConditionDay.append("\n\n")
+                    temp.append("°\n\n")
                 }
             }
         }
