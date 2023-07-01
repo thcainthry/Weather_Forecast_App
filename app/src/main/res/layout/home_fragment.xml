@@ -242,20 +242,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-    <Button
-        android:id="@+id/three_hour"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:backgroundTint="#33000000"
-        android:text="3-hour forecast"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@id/five_day_forecast"
-        app:layout_constraintEnd_toEndOf="@id/five_day_forecast"
-        app:layout_constraintTop_toBottomOf="@+id/five_day_forecast"
-        app:cornerRadius="20dp"
-        android:textAllCaps="false"
-        />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/sunrise_sunset"
@@ -265,8 +251,8 @@
         android:layout_marginTop="8dp"
         android:backgroundTint="#3E000000"
         app:cardElevation="2dp"
-        app:layout_constraintStart_toStartOf="@+id/three_hour"
-        app:layout_constraintTop_toBottomOf="@+id/three_hour"
+        app:layout_constraintStart_toStartOf="@+id/five_day_forecast"
+        app:layout_constraintTop_toBottomOf="@+id/five_day_forecast"
         app:layout_constraintEnd_toStartOf="@+id/other_info"
         >
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -348,7 +334,7 @@
         android:backgroundTint="#3E000000"
         app:cardElevation="2dp"
         app:layout_constraintTop_toTopOf="@id/sunrise_sunset"
-        app:layout_constraintEnd_toEndOf="@+id/three_hour"
+        app:layout_constraintEnd_toEndOf="@+id/five_day_forecast"
         app:layout_constraintBottom_toBottomOf="@+id/wind_direction"
         >
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -533,7 +519,7 @@
         android:layout_marginTop="5dp"
         android:backgroundTint="#3E000000"
         app:cardElevation="2dp"
-        app:layout_constraintStart_toStartOf="@+id/three_hour"
+        app:layout_constraintStart_toStartOf="@+id/five_day_forecast"
         app:layout_constraintTop_toBottomOf="@+id/sunrise_sunset"
         app:layout_constraintEnd_toStartOf="@+id/other_info"
         >

@@ -15,10 +15,11 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather_forecast_app.R
-import android.content.SharedPreferences
 import android.net.Uri
+import android.widget.ImageView
 import androidx.core.os.bundleOf
 import com.example.weather_forecast_app.databinding.HomeFragmentBinding
+import com.squareup.picasso.Picasso
 import java.util.*
 
 class HomeFragment : Fragment() {
@@ -50,14 +51,17 @@ class HomeFragment : Fragment() {
 
         if (!cityNameData.isNullOrEmpty() && !cityNameData.isNullOrBlank()) {
             homeViewModel.getCurrentWeather(cityNameData.toString())
+            homeViewModel.getForecastData(cityNameData.toString())
         }
 
         if (!cityNameBundle.isNullOrEmpty() && !cityNameBundle.isNullOrBlank()) {
             homeViewModel.getCurrentWeather(cityNameBundle.toString())
+            homeViewModel.getForecastData(cityNameBundle.toString())
         }
 
         if (!cityNameFav.isNullOrEmpty() && !cityNameFav.isNullOrBlank()) {
             homeViewModel.getCurrentWeather(cityNameFav.toString())
+            homeViewModel.getForecastData(cityNameFav.toString())
         }
 
         observeViewModel()
@@ -84,11 +88,7 @@ class HomeFragment : Fragment() {
                     R.id.action_homeFragment_to_cityFragment
             )
         }
-        binding.threeHour.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_homeFragment_to_action_fragment_three
-            )
-            }
+
 
         }
 
@@ -201,22 +201,11 @@ class HomeFragment : Fragment() {
             }
         }
 
-        homeViewModel.daysLiveData.observe(viewLifecycleOwner){
-            forecastList ->
-                adapter.days = forecastList
-                adapter.notifyDataSetChanged()
-                if (forecastList.isNotEmpty() && !isLayoutAdded && forecastList!=null){
-                    isLayoutAdded = true
-                    for (i in 0 until forecastList.size){
-                        val weatherForecast = forecastList[i]
-                        binding.fiveRecycleList.getChildAt(i).findViewById<TextView>(R.id.day).text = weatherForecast.dtTxt.toString()
-                        binding.fiveRecycleList.getChildAt(i).findViewById<TextView>(R.id.weather_condition_day).text = weatherForecast.weatherFive.firstOrNull()?.description
-                        binding.fiveRecycleList.getChildAt(i).findViewById<TextView>(R.id.high_temp_day).text = weatherForecast.mainFive?.tempMax.toString()
-                        binding.fiveRecycleList.getChildAt(i).findViewById<TextView>(R.id.low_temp_day).text = weatherForecast.mainFive?.tempMin.toString()
-
-                    }
-                }
+        homeViewModel.daysLiveData.observe(viewLifecycleOwner) {
+            adapter.days = it
+            adapter.notifyDataSetChanged()
         }
+
 
     }
 

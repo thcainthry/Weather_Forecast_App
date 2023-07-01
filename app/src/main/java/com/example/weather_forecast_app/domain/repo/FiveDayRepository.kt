@@ -1,8 +1,7 @@
 package com.example.weather_forecast_app.domain.repo
 
+import FiveDayForecast
 import com.example.weather_forecast_app.data.ApiService
-import com.example.weather_forecast_app.domain.models.CurrentWeather
-import com.example.weather_forecast_app.domain.models.FiveDayForecast
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
